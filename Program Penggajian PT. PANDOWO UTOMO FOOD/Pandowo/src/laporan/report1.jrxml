@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1611b120-7c7f-489c-b180-19ef3624bfbd">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="2"/>
+	<property name="ireport.y" value="115"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     gaji.`id_tgaji` AS gaji_id_tgaji,
+     gaji.`id_tpegawai` AS gaji_id_tpegawai,
+     gaji.`gaji_pokok` AS gaji_gaji_pokok,
+     gaji.`t_struktural` AS gaji_t_struktural,
+     gaji.`t_fungsional` AS gaji_t_fungsional,
+     gaji.`uang_makan` AS gaji_uang_makan,
+     gaji.`sewa_motor` AS gaji_sewa_motor,
+     pegawai.`id_tpegawai` AS pegawai_id_tpegawai,
+     pegawai.`nama` AS pegawai_nama,
+     pegawai.`jenis_kelamin` AS pegawai_jenis_kelamin,
+     pegawai.`no_ktp` AS pegawai_no_ktp,
+     pegawai.`tgl_lahir` AS pegawai_tgl_lahir,
+     pegawai.`no_tlp` AS pegawai_no_tlp,
+     pegawai.`agama` AS pegawai_agama,
+     pegawai.`pendidikan_terakhir` AS pegawai_pendidikan_terakhir,
+     pegawai.`status` AS pegawai_status,
+     pegawai.`nip` AS pegawai_nip,
+     pegawai.`tgl_masuk` AS pegawai_tgl_masuk,
+     pegawai.`bagian` AS pegawai_bagian,
+     pegawai.`jabatan` AS pegawai_jabatan,
+     pegawai.`alamat` AS pegawai_alamat,
+     pegawai.`image` AS pegawai_image,
+     pegawai.`darah` AS pegawai_darah,
+     pegawai.`alamat_sementara` AS pegawai_alamat_sementara
+FROM
+     `gaji` gaji,
+     `pegawai` pegawai]]>
+	</queryString>
+	<field name="gaji_id_tgaji" class="java.lang.String"/>
+	<field name="gaji_id_tpegawai" class="java.lang.String"/>
+	<field name="gaji_gaji_pokok" class="java.lang.Double"/>
+	<field name="gaji_t_struktural" class="java.lang.Double"/>
+	<field name="gaji_t_fungsional" class="java.lang.Double"/>
+	<field name="gaji_uang_makan" class="java.lang.Double"/>
+	<field name="gaji_sewa_motor" class="java.lang.Double"/>
+	<field name="pegawai_id_tpegawai" class="java.lang.String"/>
+	<field name="pegawai_nama" class="java.lang.String"/>
+	<field name="pegawai_jenis_kelamin" class="java.lang.String"/>
+	<field name="pegawai_no_ktp" class="java.lang.String"/>
+	<field name="pegawai_tgl_lahir" class="java.sql.Date"/>
+	<field name="pegawai_no_tlp" class="java.lang.String"/>
+	<field name="pegawai_agama" class="java.lang.String"/>
+	<field name="pegawai_pendidikan_terakhir" class="java.lang.String"/>
+	<field name="pegawai_status" class="java.lang.String"/>
+	<field name="pegawai_nip" class="java.lang.String"/>
+	<field name="pegawai_tgl_masuk" class="java.sql.Date"/>
+	<field name="pegawai_bagian" class="java.lang.String"/>
+	<field name="pegawai_jabatan" class="java.lang.String"/>
+	<field name="pegawai_alamat" class="java.lang.String"/>
+	<field name="pegawai_image" class="java.lang.String"/>
+	<field name="pegawai_darah" class="java.lang.String"/>
+	<field name="pegawai_alamat_sementara" class="java.lang.String"/>
+	<group name="gaji_id_tgaji">
+		<groupExpression><![CDATA[$F{gaji_id_tgaji}]]></groupExpression>
+	</group>
+	<group name="gaji_id_tpegawai">
+		<groupExpression><![CDATA[$F{gaji_id_tpegawai}]]></groupExpression>
+	</group>
+	<group name="gaji_uang_makan">
+		<groupExpression><![CDATA[$F{gaji_uang_makan}]]></groupExpression>
+	</group>
+	<group name="gaji_t_fungsional">
+		<groupExpression><![CDATA[$F{gaji_t_fungsional}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="336" y="0" width="236" height="26" uuid="fdec67a0-0f80-46d7-9954-78eee82b437d"/>
+				<textElement>
+					<font fontName="Arial Black" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SLIP GAJI KARYAWAN]]></text>
+			</staticText>
+			<image>
+				<reportElement x="12" y="0" width="98" height="79" uuid="992fdcc8-8c96-4d66-ab2e-87b88b768e28"/>
+				<imageExpression><![CDATA["E:\\pandawa utama\\logo\\logo pandowo.JPG"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="392" y="15" width="100" height="20" uuid="ed104ff2-3aaa-4cde-a09d-f3b1fa8c9b2a"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[JABATAN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="14" y="15" width="146" height="20" uuid="c368574e-ae8f-4ba7-993d-55af0b800257"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NAMA KARYAWAN]]></text>
+			</staticText>
+			<line>
+				<reportElement x="17" y="8" width="555" height="1" uuid="6147e769-83e8-4ad2-bc00-2c005aed9fab"/>
+				<graphicElement>
+					<pen lineWidth="5.0"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="51" splitType="Stretch">
+			<staticText>
+				<reportElement x="14" y="0" width="14" height="20" uuid="537ef38a-3a01-423a-9adc-1d72558d7bb5"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMOR INDUK]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="14" y="20" width="100" height="20" uuid="026b8aa2-5741-4215-8e98-2002c2143863"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMOR KTP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="392" y="0" width="100" height="20" uuid="16250ff9-d452-4ad9-9944-177f0722c27d"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BAGIAN	]]></text>
+			</staticText>
+			<line>
+				<reportElement x="17" y="40" width="555" height="1" uuid="b77b5534-88be-4919-9d3e-ce38e758b506"/>
+				<graphicElement>
+					<pen lineWidth="5.0"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="209" splitType="Stretch">
+			<line>
+				<reportElement x="17" y="96" width="533" height="1" uuid="138c20ba-1cc8-427e-b61f-1037edad16f4"/>
+				<graphicElement>
+					<pen lineWidth="3.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="25" y="149" width="138" height="20" uuid="281bc0a1-cd01-4490-b3bf-b4cac1354ef1"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BPJS Kesehatan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="25" y="169" width="140" height="20" uuid="9c058bda-88ed-4a44-9b77-122a0b1053f1"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Piutang Karyawan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="25" y="129" width="155" height="20" uuid="71f6f3da-3e70-4d7d-9e92-86a2c8348442"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BPJS Ketenagakerjaan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="25" y="102" width="129" height="18" uuid="55bfcedc-52bd-4bd6-8b52-051732be48f3"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[POTONGAN]]></text>
+			</staticText>
+<!--			<line>
+				<reportElement x="19" y="5" width="100" height="20" uuid="1a04d1b4-571d-4b70-9382-01a590415100"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</line>-->
+			<staticText>
+				<reportElement x="19" y="5" width="100" height="20" uuid="9a5c5aaf-adaf-4511-a309-e68f3c651165"/>
+				<text><![CDATA[Gaji Pokok]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="19" y="26" width="100" height="20" uuid="e1b8e92d-6c57-4b23-bb07-264e086435f6"/>
+				<text><![CDATA[Uang Kos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="19" y="47" width="100" height="20" uuid="2e9d3383-652d-4ab2-aeaa-2a0927722b63"/>
+				<text><![CDATA[Uang Makan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="19" y="69" width="100" height="20" uuid="007bdc54-46d8-4129-942f-1ab8407a6a95"/>
+				<text><![CDATA[Sewa Motor]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="149" splitType="Stretch">
+			<staticText>
+				<reportElement x="22" y="7" width="205" height="20" uuid="77cffbfe-071c-41c5-a673-b265764eaea5"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Pembayaran Bersih]]></text>
+			</staticText>
+			<line>
+				<reportElement x="20" y="33" width="525" height="1" uuid="337b8c5f-4a9f-4881-85c5-b1aaf40d543c"/>
+				<graphicElement>
+					<pen lineWidth="5.0" lineStyle="Double"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="144" width="100" height="1" uuid="da9a0c77-52d1-48ab-b232-1580ba922e5d"/>
+			</line>
+			<staticText>
+				<reportElement x="449" y="95" width="100" height="20" uuid="af8790fe-4671-4082-b652-b737a2a1c310"/>
+				<text><![CDATA[Penerima : ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="442" y="144" width="100" height="1" uuid="a755b576-addc-4935-be42-2251358fa8be"/>
+			</line>
+			<staticText>
+				<reportElement x="2" y="90" width="100" height="20" uuid="67865faf-8df2-42b4-bdfe-dadf24b85a68"/>
+				<text><![CDATA[Dibuat Oleh : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="109" width="100" height="20" uuid="be4da318-e66f-45cd-afb4-0a5eb4a31699"/>
+				<text><![CDATA[HRD]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="3" splitType="Stretch"/>
+	</summary>
+</jasperReport>
