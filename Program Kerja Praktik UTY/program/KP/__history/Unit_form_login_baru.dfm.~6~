@@ -1,0 +1,77 @@
+object Form_login_baru: TForm_login_baru
+  Left = 0
+  Top = 0
+  Caption = 'Form_login_baru'
+  ClientHeight = 201
+  ClientWidth = 265
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 265
+    Height = 201
+    TabOrder = 0
+    object Edit_username_login: TEdit
+      Left = 48
+      Top = 29
+      Width = 153
+      Height = 24
+      Alignment = taCenter
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Lucida Console'
+      Font.Style = []
+      MaxLength = 10
+      ParentFont = False
+      TabOrder = 0
+      Text = 'Edit_username_login'
+      OnClick = Edit_username_loginClick
+      OnKeyPress = Edit_username_loginKeyPress
+    end
+    object Edit_pasword_login: TEdit
+      Left = 48
+      Top = 72
+      Width = 153
+      Height = 24
+      Alignment = taCenter
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Lucida Console'
+      Font.Style = []
+      MaxLength = 10
+      ParentFont = False
+      TabOrder = 1
+      Text = 'Edit_pasword_login'
+      OnKeyPress = Edit_pasword_loginKeyPress
+    end
+    object Button_login_baru: TButton
+      Left = 48
+      Top = 128
+      Width = 65
+      Height = 41
+      Caption = 'LOGIN'
+      TabOrder = 2
+      OnClick = Button_login_baruClick
+    end
+    object Button_cencel_baru: TButton
+      Left = 142
+      Top = 128
+      Width = 59
+      Height = 41
+      Caption = 'CENCEL'
+      TabOrder = 3
+      OnClick = Button_cencel_baruClick
+    end
+  end
+end

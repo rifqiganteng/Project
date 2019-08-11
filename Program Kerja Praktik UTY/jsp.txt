@@ -1,0 +1,17 @@
+	
+
+How can I prevent close of JFrame while closing JasperViewer?
+
+try {
+          JasperDesign jd = JRXmlLoader.load("D:\\Projects\\DiagonosisCentre\\reports\\reportAddNewPatient.jrxml");
+          String sqlr = "SELECT * FROM current where patientID = '"+id+"'";
+          JRDesignQuery newQuery = new JRDesignQuery();
+          newQuery.setText(sqlr);
+          jd.setQuery(newQuery);
+          JasperReport jr = JasperCompileManager.compileReport(jd);
+          JasperPrint jp = JasperFillManager.fillReport(jr, null, db.conn);
+          JasperViewer.viewReport(jp);
+     } catch (JRException jRException) {
+          JOptionPane.showMessageDialog(null, "catch 1"+jRException);
+     }
+

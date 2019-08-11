@@ -1,0 +1,106 @@
+object Form_utama: TForm_utama
+  Left = 0
+  Top = 0
+  Caption = 'Form_utama'
+  ClientHeight = 412
+  ClientWidth = 810
+  Color = clBtnFace
+  Font.Charset = ANSI_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -19
+  Font.Name = 'Britannic Bold'
+  Font.Style = []
+  Menu = MainMenu1
+  OldCreateOrder = False
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 21
+  object MainMenu1: TMainMenu
+    Left = 296
+    Top = 88
+    object HELP2: TMenuItem
+      Caption = 'FILE'
+      object LOGIN1: TMenuItem
+        Caption = 'LOGIN'
+        OnClick = LOGIN1Click
+      end
+      object logout1: TMenuItem
+        Caption = 'LOG OUT'
+        OnClick = logout1Click
+      end
+      object N1: TMenuItem
+        Caption = '-'
+      end
+      object KONEKSI1: TMenuItem
+        Caption = 'KONEKSI'
+        OnClick = KONEKSI1Click
+      end
+      object KONFIGURASI1: TMenuItem
+        Caption = 'KONFIGURASI'
+        object USERNAME1: TMenuItem
+          Caption = 'USERNAME'
+          OnClick = USERNAME1Click
+        end
+        object PASSWORD1: TMenuItem
+          Caption = 'PASSWORD'
+          OnClick = PASSWORD1Click
+        end
+      end
+      object N2: TMenuItem
+        Caption = '-'
+      end
+      object KELUAR1: TMenuItem
+        Caption = 'KELUAR'
+        OnClick = KELUAR1Click
+      end
+    end
+    object MASTER1: TMenuItem
+      Caption = 'MASTER'
+      object PETUGAS1: TMenuItem
+        Caption = 'PETUGAS'
+        OnClick = PETUGAS1Click
+      end
+      object PEMBERANGKATAN1: TMenuItem
+        Caption = 'PEMBERANGKATAN'
+        OnClick = PEMBERANGKATAN1Click
+      end
+      object JALUR1: TMenuItem
+        Caption = 'JALUR'
+        OnClick = JALUR1Click
+      end
+      object BERATBARANG1: TMenuItem
+        Caption = 'BERAT BARANG'
+        OnClick = BERATBARANG1Click
+      end
+      object JENISBARANG1: TMenuItem
+        Caption = 'JENIS BARANG'
+        OnClick = JENISBARANG1Click
+      end
+    end
+    object TRANSAKSI: TMenuItem
+      Caption = 'TRANSAKSI'
+      object IKET1: TMenuItem
+        Caption = 'TIKET'
+        OnClick = IKET1Click
+      end
+      object BARANG1: TMenuItem
+        Caption = 'BARANG'
+        OnClick = BARANG1Click
+      end
+    end
+    object LAPORAN: TMenuItem
+      Caption = 'LAPORAN'
+      object RANSAKSITIKET1: TMenuItem
+        Caption = 'TRANSAKSI TIKET'
+      end
+      object RANSAKSIPENGIRIMANMARANG1: TMenuItem
+        Caption = 'TRANSAKSI PENGIRIMAN MARANG'
+      end
+    end
+    object HELP: TMenuItem
+      Caption = 'HELP'
+    end
+  end
+end

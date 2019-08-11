@@ -1,0 +1,33 @@
+unit Unit_koneksi;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  TForm_koneksi = class(TForm)
+    Edit_SERVER: TEdit;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Edit_DATABASE: TEdit;
+    Edit_USERNAME: TEdit;
+    Edit_PASSWORD: TEdit;
+    Button_KONEKSI: TButton;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form_koneksi: TForm_koneksi;
+
+implementation
+
+{$R *.dfm}
+
+end.

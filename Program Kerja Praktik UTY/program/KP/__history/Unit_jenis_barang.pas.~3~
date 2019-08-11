@@ -1,0 +1,37 @@
+unit Unit_jenis_barang;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids,
+  Vcl.ExtCtrls;
+
+type
+  TForm_jenis_barang = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label3: TLabel;
+    Label2: TLabel;
+    Edit_id_jenis: TEdit;
+    Edit_jenis_barang: TEdit;
+    Edit_harga: TEdit;
+    Panel2: TPanel;
+    DBGrid_harga_jenis_barang: TDBGrid;
+    Button_update: TButton;
+    Button_delete: TButton;
+    Button_simpan: TButton;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form_jenis_barang: TForm_jenis_barang;
+
+implementation
+
+{$R *.dfm}
+
+end.

@@ -1,0 +1,212 @@
+object Data_Module: TData_Module
+  OldCreateOrder = False
+  Height = 441
+  Width = 686
+  object ADOConnection1: TADOConnection
+    Connected = True
+    ConnectionString = 
+      'Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security In' +
+      'fo=False;Initial Catalog=travel;Data Source=DESKTOP-L914J05\SQLE' +
+      'XPRESS;Use Procedure for Prepare=1;Auto Translate=True;Packet Si' +
+      'ze=4096;Workstation ID=DESKTOP-L914J05;Use Encryption for Data=F' +
+      'alse;Tag with column collation when possible=False'
+    LoginPrompt = False
+    Provider = 'SQLOLEDB.1'
+    Left = 32
+    Top = 8
+  end
+  object ADOQuery_login: TADOQuery
+    Connection = ADOConnection1
+    Parameters = <>
+    Left = 96
+    Top = 80
+  end
+  object ADOQuery_petugas: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'select * from tb_petugas')
+    Left = 96
+    Top = 136
+  end
+  object DataSource_petugas: TDataSource
+    DataSet = ADOQuery_petugas
+    Left = 176
+    Top = 144
+  end
+  object ADOQuery_pemberangkatan: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'select * from tb_pemberangkatan')
+    Left = 96
+    Top = 200
+  end
+  object ADOQuery1: TADOQuery
+    Connection = ADOConnection1
+    Parameters = <>
+    Left = 96
+    Top = 16
+  end
+  object DataSource_pemberangkatan: TDataSource
+    DataSet = ADOQuery_pemberangkatan
+    Left = 176
+    Top = 208
+  end
+  object ADOQuery_jalur: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'select * from tb_jalur')
+    Left = 96
+    Top = 272
+  end
+  object DataSource_jalur: TDataSource
+    DataSet = ADOQuery_jalur
+    Left = 168
+    Top = 280
+  end
+  object ADOQuery_trans_tiket: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    Left = 288
+    Top = 8
+  end
+  object ADOQuery_trans_barang: TADOQuery
+    Connection = ADOConnection1
+    Parameters = <>
+    Left = 280
+    Top = 64
+  end
+  object DataSource_trans_tiket: TDataSource
+    DataSet = ADOQuery_trans_tiket
+    Left = 356
+    Top = 8
+  end
+  object DataSource_trans_barang: TDataSource
+    Left = 356
+    Top = 72
+  end
+  object ADOQuery_pilih_jalur: TADOQuery
+    Connection = ADOConnection1
+    Parameters = <>
+    Left = 280
+    Top = 120
+  end
+  object DataSource_pilih_jalur: TDataSource
+    Left = 356
+    Top = 128
+  end
+  object DataSource_pilih_jam: TDataSource
+    Left = 404
+    Top = 176
+  end
+  object DataTampilTransTiket: TDataSource
+    DataSet = ADOTampilTransTiket
+    Left = 408
+    Top = 288
+  end
+  object ADOTampilTransTiket: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      
+        'select * from trans_tiket, detil_tiket where trans_tiket.kd_tran' +
+        'stiket=detil_tiket.kd_transtiket')
+    Left = 288
+    Top = 312
+  end
+  object ADOQuery_pilih_jam: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      '')
+    Left = 280
+    Top = 176
+  end
+  object ADOQuery_tampil: TADOQuery
+    Connection = ADOConnection1
+    Parameters = <>
+    Left = 80
+    Top = 344
+  end
+  object DataSource_tampil: TDataSource
+    DataSet = ADOQuery_tampil
+    Left = 168
+    Top = 336
+  end
+  object ADOQuery_simpan_trans_tiket: TADOQuery
+    Connection = ADOConnection1
+    Parameters = <>
+    Left = 288
+    Top = 240
+  end
+  object DataSource_simpan_trans_tiket: TDataSource
+    DataSet = ADOQuery_simpan_trans_tiket
+    Left = 392
+    Top = 224
+  end
+  object ADOQuery_berat_barang: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'select * from tb_berat')
+    Left = 464
+    Top = 8
+  end
+  object DataSource_berat_barang: TDataSource
+    DataSet = ADOQuery_berat_barang
+    Left = 576
+    Top = 24
+  end
+  object ADOQuery_jenis_barang: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'select * from tb_jenis_barang')
+    Left = 496
+    Top = 88
+  end
+  object DataSource_jenis_barang: TDataSource
+    DataSet = ADOQuery_jenis_barang
+    Left = 600
+    Top = 144
+  end
+  object ADOComboJnsBrg: TADOQuery
+    Connection = ADOConnection1
+    Parameters = <>
+    Left = 528
+    Top = 216
+  end
+  object DataSource_untuk_tampil_barang: TDataSource
+    DataSet = ADOQuery_untuk_tampil_transaksi_barang
+    Left = 587
+    Top = 288
+  end
+  object ADOQuery_untuk_tampil_transaksi_barang: TADOQuery
+    Connection = ADOConnection1
+    Parameters = <>
+    Left = 528
+    Top = 280
+  end
+  object ADOQuery_laporan_tiket: TADOQuery
+    Connection = ADOConnection1
+    Parameters = <>
+    Left = 488
+    Top = 360
+  end
+  object ADOQuery_laporan_barang: TADOQuery
+    Connection = ADOConnection1
+    Parameters = <>
+    Left = 584
+    Top = 360
+  end
+end

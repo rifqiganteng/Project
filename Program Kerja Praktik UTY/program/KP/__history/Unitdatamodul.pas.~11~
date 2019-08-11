@@ -1,0 +1,55 @@
+unit Unitdatamodul;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, Data.DB, Data.Win.ADODB;
+
+type
+  TData_Module = class(TDataModule)
+    ADOConnection1: TADOConnection;
+    ADOQuery_login: TADOQuery;
+    ADOQuery_petugas: TADOQuery;
+    DataSource_petugas: TDataSource;
+    ADOQuery_pemberangkatan: TADOQuery;
+    ADOQuery1: TADOQuery;
+    DataSource_pemberangkatan: TDataSource;
+    ADOQuery_jalur: TADOQuery;
+    DataSource_jalur: TDataSource;
+    ADOQuery_trans_barang: TADOQuery;
+    DataSource_trans_tiket: TDataSource;
+    DataSource_trans_barang: TDataSource;
+    ADOQuery_pilih_jalur: TADOQuery;
+    DataSource_pilih_jalur: TDataSource;
+    DataSource_pilih_jam: TDataSource;
+    DataTampilTransTiket: TDataSource;
+    ADOTampilTransTiket: TADOQuery;
+    ADOQuery_pilih_jam: TADOQuery;
+    ADOQuery_trans_tiket: TADOQuery;
+    ADOQuery_tampil: TADOQuery;
+    DataSource_tampil: TDataSource;
+    ADOQuery_simpan_trans_tiket: TADOQuery;
+    DataSource_simpan_trans_tiket: TDataSource;
+    ADOQuery_berat_barang: TADOQuery;
+    DataSource_berat_barang: TDataSource;
+    ADOQuery_jenis_barang: TADOQuery;
+    DataSource_jenis_barang: TDataSource;
+    ADOComboJnsBrg: TADOQuery;
+    DataSource_untuk_tampil_barang: TDataSource;
+    ADOQuery_untuk_tampil_transaksi_barang: TADOQuery;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Data_Module: TData_Module;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+end.

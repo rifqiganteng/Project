@@ -1,0 +1,25 @@
+unit Unit_laporan_tiket;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, QuickRpt;
+
+type
+  TForm_laporan_tiket = class(TForm)
+    QuickRep1: TQuickRep;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form_laporan_tiket: TForm_laporan_tiket;
+
+implementation
+
+{$R *.dfm}
+
+end.

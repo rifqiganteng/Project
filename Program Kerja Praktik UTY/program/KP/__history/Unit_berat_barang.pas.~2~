@@ -1,0 +1,37 @@
+unit Unit_berat_barang;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids,
+  Vcl.ExtCtrls;
+
+type
+  TForm_harga = class(TForm)
+    Panel: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Edit_id_berat: TEdit;
+    Edit_berat_kg: TEdit;
+    Edit_harga_berat: TEdit;
+    Panel1: TPanel;
+    DBGrid_berat: TDBGrid;
+    Button_update: TButton;
+    Button_delete: TButton;
+    Button_simpan: TButton;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form_harga: TForm_harga;
+
+implementation
+
+{$R *.dfm}
+
+end.

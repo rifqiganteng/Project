@@ -1,0 +1,493 @@
+unit Unittransaksibarang;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls,
+  Vcl.ExtCtrls, Data.DB, Data.Win.ADODB, Vcl.ComCtrls, Vcl.Menus;
+
+type
+  TForm_pengiriman_barang = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label_petugas_pengiriman_barang: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    Label12: TLabel;
+    Label13: TLabel;
+    Label14: TLabel;
+    Edit_pengiriman_barang: TEdit;
+    Edit_petugas_pengiriman_barang: TEdit;
+    Edit_nama_barang: TEdit;
+    Edit_nama_pengirim_barang: TEdit;
+    Edit_alamat_pengirim_barang: TEdit;
+    Edit8_alamat_penerima_barang: TEdit;
+    Edit_nomor_telepon_pengirim: TEdit;
+    Edit_nomor_telephon_penerima: TEdit;
+    Edit_total_harga_pengiriman_barang: TEdit;
+    Button_simpan_pengiriman_barang: TButton;
+    Button_reset_pengiriman_barang: TButton;
+    Edit_nama_penerima_barang: TEdit;
+    Button_cari_jalur: TButton;
+    Edit_jalur_barang: TEdit;
+    Edit_kota_tujuan: TEdit;
+    Edit_kota_awal: TEdit;
+    Panel2: TPanel;
+    DBGrid_pengiriman_barang: TDBGrid;
+    ComboBox_kategori_barang: TComboBox;
+    Label15: TLabel;
+    ComboBox_berat_barang: TComboBox;
+    Label16: TLabel;
+    Label3: TLabel;
+    Label9: TLabel;
+    edHrgTujuan: TEdit;
+    edHrgKategori: TEdit;
+    edHrgBerat: TEdit;
+    ADOQuery_khusus_jenis_barang: TADOQuery;
+    ADOQuery_khusus_beratbarang: TADOQuery;
+    DateTimePicker_pengiriman_barang: TDateTimePicker;
+    Label17: TLabel;
+    PopupMenu1: TPopupMenu;
+    CETAK1: TMenuItem;
+    procedure Button_cari_jalurClick(Sender: TObject);
+    procedure Button_reset_pengiriman_barangClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure ComboBox_kategori_barangChange(Sender: TObject);
+    procedure ComboBox_berat_barangChange(Sender: TObject);
+    procedure Button_simpan_pengiriman_barangClick(Sender: TObject);
+    procedure CETAK1Click(Sender: TObject);
+    procedure DBGrid_pengiriman_barangCellClick(Column: TColumn);
+    procedure ComboBox_kategori_barangKeyPress(Sender: TObject; var Key: Char);
+    procedure ComboBox_berat_barangKeyPress(Sender: TObject; var Key: Char);
+    procedure Edit_nomor_telepon_pengirimKeyPress(Sender: TObject;
+      var Key: Char);
+    procedure Edit_nomor_telephon_penerimaKeyPress(Sender: TObject;
+      var Key: Char);
+    procedure DateTimePicker_pengiriman_barangChange(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure nomer_urut_pengiriman_barang;
+    procedure kombobox;
+    procedure simpan_transaksi_barang;
+    procedure simpan_pengiriman_barang;//(untuk detil barang )
+    procedure tampil;
+    procedure cetak;
+    procedure nama_petugas;
+  end;
+
+var
+  Form_pengiriman_barang: TForm_pengiriman_barang;
+  id_jns_brg,id_berat_barang:String;
+
+implementation
+
+uses
+  Unit_cari_jalur, Unitdatamodul, strutils, Unit_cetak_barang;
+
+{$R *.dfm}
+
+
+
+procedure TForm_pengiriman_barang.Button_cari_jalurClick(Sender: TObject);
+begin
+Form_cari_jalur.ShowModal;
+end;
+
+procedure TForm_pengiriman_barang.Button_reset_pengiriman_barangClick(
+  Sender: TObject);
+begin
+//Edit_pengiriman_barang.Clear;
+//Edit_petugas_pengiriman_barang.Clear;
+Edit_nama_barang.Clear;
+Edit_nama_pengirim_barang.Clear;
+Edit_alamat_pengirim_barang.Clear;
+Edit8_alamat_penerima_barang.Clear;
+Edit_nomor_telepon_pengirim.Clear;
+Edit_total_harga_pengiriman_barang.Clear;
+Edit_nama_penerima_barang.Clear;
+Edit_jalur_barang.Clear;
+end;
+
+procedure TForm_pengiriman_barang.Button_simpan_pengiriman_barangClick(
+  Sender: TObject);
+begin
+if(Edit_pengiriman_barang.Text = '') or (Edit_petugas_pengiriman_barang.Text = '')
+or (Edit_nama_barang.Text = '')or (Edit_nama_pengirim_barang.Text = '')
+or (Edit_alamat_pengirim_barang.Text = '')or (Edit_nomor_telepon_pengirim.Text = '')
+or (Edit_nomor_telephon_penerima.Text = '')or (Edit_total_harga_pengiriman_barang.Text = '')
+or (Edit_nama_penerima_barang.Text = '')or (Edit_jalur_barang.Text = '')
+or (Edit_kota_tujuan.Text = '')or (Edit_kota_awal.Text = '')
+or (ComboBox_kategori_barang.Text = '-Pilih Kategori Barang-')or (ComboBox_berat_barang.Text = '-pilih Berat Barang-') then
+  begin
+  ShowMessage('lengkapi data terlebih dahulu');
+  Abort;
+  end
+  else
+simpan_pengiriman_barang;
+//simpan_pengiriman_barang;
+if MessageDlg('Ingin Transaksi Lagi?',mtConfirmation,[mbYes,mbNo],0)=mrYes then
+  begin
+  cetak;
+  nomer_urut_pengiriman_barang;
+Edit_nama_barang.Clear;
+//Edit_pengiriman_barang.Clear;
+Edit_nama_barang.Clear;
+//Edit_nama_pengirim_barang.Clear;
+Edit_kota_awal.Clear;
+//Edit_alamat_pengirim_barang.Clear;
+Edit_kota_tujuan.Clear;
+Edit8_alamat_penerima_barang.Clear;
+//Edit_nomor_telepon_pengirim.Clear;
+Edit_nomor_telephon_penerima.Clear;
+Edit_jalur_barang.Clear;
+Edit_nama_penerima_barang.Clear;
+//ComboBox_kategori_barang.Clear;
+//ComboBox_berat_barang.Clear;
+ComboBox_kategori_barang.Items.Clear;
+ComboBox_berat_barang.Items.Clear;
+ComboBox_kategori_barang.Text:='-Pilih Kategori Barang-';
+ComboBox_berat_barang.Text:='-pilih Berat Barang-';
+kombobox;
+
+//bersih;
+end
+else
+begin
+simpan_transaksi_barang;
+cetak;
+  nomer_urut_pengiriman_barang;
+Edit_nama_barang.Clear;
+//Edit_pengiriman_barang.Clear;
+Edit_nama_barang.Clear;
+Edit_nama_pengirim_barang.Clear;
+Edit_kota_awal.Clear;
+Edit_alamat_pengirim_barang.Clear;
+Edit_kota_tujuan.Clear;
+Edit8_alamat_penerima_barang.Clear;
+Edit_nomor_telepon_pengirim.Clear;
+Edit_nomor_telephon_penerima.Clear;
+Edit_jalur_barang.Clear;
+Edit_nama_penerima_barang.Clear;
+ComboBox_kategori_barang.Clear;
+ComboBox_berat_barang.Clear;
+kombobox;
+end;
+end;
+
+
+procedure TForm_pengiriman_barang.cetak;
+var tgl_brngkt:String;
+begin
+tgl_brngkt:=DateToStr(DateTimePicker_pengiriman_barang.Date);
+Form_cetak_barang.QRLabel_ID_PENGIRIMAN.Caption:=Edit_pengiriman_barang.Text;
+Form_cetak_barang.QRLabel_NAMA_BARANG.Caption:=Edit_nama_barang.Text;
+Form_cetak_barang.QRLabel_NAMA_PENGIRIM.Caption:=Edit_nama_pengirim_barang.Text;
+Form_cetak_barang.QRLabel_NAMA_PENERIMA.Caption:= Edit_nama_penerima_barang.Text;
+Form_cetak_barang.QRLabel_ALAMAT_TUJUAN.Caption:=Edit8_alamat_penerima_barang.Text;
+Form_cetak_barang.QRLabel_TANGGAL_PENGIRIMAN.Caption:=tgl_brngkt;
+Form_cetak_barang.QRLabel_TOTAL_HARGA.Caption:=Edit_total_harga_pengiriman_barang.Text;
+nama_petugas;
+Form_cetak_barang.QuickRep1.Preview;
+end;
+
+procedure TForm_pengiriman_barang.CETAK1Click(Sender: TObject);
+begin
+nama_petugas;
+Form_cetak_barang.QuickRep1.Preview;
+end;
+
+procedure TForm_pengiriman_barang.ComboBox_berat_barangChange(Sender: TObject);
+  var HrgBerat,HrgTuj,tothrg,angka:real;
+
+begin
+  with Data_Module.ADOComboJnsBrg do
+    begin
+      Active:=False;
+      SQL.Text:='select harga_per_kg from tb_berat where berat_per_kg='+QuotedStr(ComboBox_berat_barang.Text);
+      Active:=True;
+    end;
+  edHrgBerat.Text:=Data_Module.ADOComboJnsBrg.FieldValues['harga_per_kg'];
+  HrgTuj:=StrToFloat(edHrgTujuan.Text);
+  HrgBerat:=StrToFloat(edHrgBerat.Text);
+  tothrg:=(HrgTuj+HrgBerat)*0.5;
+  Edit_total_harga_pengiriman_barang.Text:=FloatToStr(tothrg);
+  with ADOQuery_khusus_beratbarang do
+    begin
+      Active:=False;
+      SQL.Text:='select id_berat from tb_berat where berat_per_kg='+QuotedStr(ComboBox_berat_barang.Text);
+      Active:=True;
+    end;
+  id_berat_barang:=ADOQuery_khusus_beratbarang.FieldValues['id_berat'];
+end;
+
+procedure TForm_pengiriman_barang.ComboBox_berat_barangKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+Key:=#0;
+end;
+
+procedure TForm_pengiriman_barang.ComboBox_kategori_barangChange(
+  Sender: TObject);
+  var HrgKat,HrgTuj,tothrg:integer;
+begin
+  with Data_Module.ADOComboJnsBrg do
+    begin
+      Active:=False;
+      SQL.Text:='select harga_jenis_barang from tb_jenis_barang where jenis_barang='+QuotedStr(ComboBox_kategori_barang.Text);
+      Active:=True;
+    end;
+  edHrgKategori.Text:=Data_Module.ADOComboJnsBrg.FieldValues['harga_jenis_barang'];
+  HrgTuj:=StrToInt(edHrgTujuan.Text);
+  HrgKat:=StrToInt(edHrgKategori.Text);
+  tothrg:=HrgTuj+HrgKat;
+  Edit_total_harga_pengiriman_barang.Text:=IntToStr(tothrg);
+  with ADOQuery_khusus_jenis_barang do
+    begin
+      Active:=False;
+      SQL.Text:='select id_jenis from tb_jenis_barang where jenis_barang='+QuotedStr(ComboBox_kategori_barang.Text);
+      Active:=True;
+    end;
+  id_jns_brg:=ADOQuery_khusus_jenis_barang.FieldValues['id_jenis'];
+end;
+
+procedure TForm_pengiriman_barang.ComboBox_kategori_barangKeyPress(
+  Sender: TObject; var Key: Char);
+begin
+Key:=#0;
+end;
+
+procedure TForm_pengiriman_barang.DateTimePicker_pengiriman_barangChange(
+  Sender: TObject);
+begin
+tampil;
+end;
+
+procedure TForm_pengiriman_barang.DBGrid_pengiriman_barangCellClick(
+  Column: TColumn);
+begin
+with Data_Module.ADOQuery_untuk_tampil_transaksi_barang do
+begin
+Form_cetak_barang.QRLabel_ID_PENGIRIMAN.Caption:=Data_Module.ADOQuery_untuk_tampil_transaksi_barang.Fields[0].AsString;
+Form_cetak_barang.QRLabel_NAMA_BARANG.Caption:=Data_Module.ADOQuery_untuk_tampil_transaksi_barang.fields[4].AsString;
+Form_cetak_barang.QRLabel_NAMA_PENGIRIM.Caption:=Data_Module.ADOQuery_untuk_tampil_transaksi_barang.fields[5].AsString;
+Form_cetak_barang.QRLabel_NAMA_PENERIMA.Caption:=Data_Module.ADOQuery_untuk_tampil_transaksi_barang.fields[13].AsString;
+Form_cetak_barang.QRLabel_ALAMAT_TUJUAN.Caption:=Data_Module.ADOQuery_untuk_tampil_transaksi_barang.fields[9].AsString;
+Form_cetak_barang.QRLabel_TANGGAL_PENGIRIMAN.Caption:=Data_Module.ADOQuery_untuk_tampil_transaksi_barang.fields[3].AsString;
+Form_cetak_barang.QRLabel_TOTAL_HARGA.Caption:=Data_Module.ADOQuery_untuk_tampil_transaksi_barang.fields[2].AsString;
+end;
+end;
+
+procedure TForm_pengiriman_barang.Edit_nomor_telephon_penerimaKeyPress(
+  Sender: TObject; var Key: Char);
+begin
+if not (key in[#8, '0'..'9','+','-']) then begin
+  ShowMessage('isikan angka pada nomer telephon');
+  key :=#0;
+end;
+end;
+
+procedure TForm_pengiriman_barang.Edit_nomor_telepon_pengirimKeyPress(
+  Sender: TObject; var Key: Char);
+begin
+if not (key in[#8, '0'..'9','+','-']) then begin
+  ShowMessage('isikan angka pada nomer telephon');
+  key :=#0;
+end;
+end;
+
+procedure TForm_pengiriman_barang.FormShow(Sender: TObject);
+begin
+Edit_pengiriman_barang.Clear;
+//Edit_petugas_pengiriman_barang.Clear;
+Edit_nama_barang.Clear;
+Edit_nama_pengirim_barang.Clear;
+Edit_alamat_pengirim_barang.Clear;
+Edit8_alamat_penerima_barang.Clear;
+Edit_nomor_telepon_pengirim.Clear;
+Edit_total_harga_pengiriman_barang.Clear;
+Edit_nama_penerima_barang.Clear;
+Edit_jalur_barang.Clear;
+Edit_nomor_telephon_penerima.Clear;
+Edit_jalur_barang.Clear;
+Edit_kota_tujuan.Clear;
+Edit_kota_awal.Clear;
+DateTimePicker_pengiriman_barang.Date:=Now;
+nomer_urut_pengiriman_barang;
+Edit_pengiriman_barang.Enabled:=False;
+Edit_petugas_pengiriman_barang.Enabled:=False;
+ComboBox_kategori_barang.Text:='-Pilih Kategori Barang-';
+ComboBox_berat_barang.Text:='-pilih Berat Barang-';
+tampil;
+
+kombobox;
+end;
+
+procedure TForm_pengiriman_barang.kombobox;
+begin
+with Data_Module.ADOQuery_jenis_barang do
+  begin
+      Active:=False;
+      SQL.Text:='select jenis_barang from tb_jenis_barang group by jenis_barang';
+      Active:=True;
+  end;
+while not Data_Module.ADOQuery_jenis_barang.Eof do
+  begin
+  //ComboBox_kategori_barang.Clear;
+    ComboBox_kategori_barang.Items.Add(Data_Module.ADOQuery_jenis_barang.FieldByName('jenis_barang').AsString);
+    Data_Module.ADOQuery_jenis_barang.Next;
+end;
+with Data_Module.ADOQuery_berat_barang do
+  begin
+      Active:=False;
+      SQL.Text:='select berat_per_kg from tb_berat group by berat_per_kg';
+      Active:=True;
+  end;
+while not Data_Module.ADOQuery_berat_barang.eof do
+begin
+//ComboBox_berat_barang.Clear;
+ComboBox_berat_barang.Items.Add(Data_Module.ADOQuery_berat_barang.FieldByName('berat_per_kg').AsString);
+Data_Module.ADOQuery_berat_barang.Next;
+end;
+
+end;
+
+
+
+procedure TForm_pengiriman_barang.nama_petugas;
+begin
+with Form_cetak_barang.ADOQuery1 do
+begin
+  Active:=false;
+  SQL.Text:= 'select nama from tb_petugas where id_petugas=' +QuotedStr(Edit_petugas_pengiriman_barang.Text);
+  Active:=True;
+end;
+ Form_cetak_barang.QRnmptgs.Caption:=Form_cetak_barang.ADOQuery1.FieldByName('nama').AsString;
+end;
+
+procedure TForm_pengiriman_barang.nomer_urut_pengiriman_barang;
+var
+id,idjadi, nol:string;
+begin
+nol:='00';
+with Data_Module.ADOQuery_trans_barang do
+begin
+  SQL.Clear;
+  sql.Add('select * from trans_brg order by kd_trans');
+  Open;
+  if RecordCount > 0 then
+  begin
+    last;
+    id:=FieldByName('kd_trans').AsString;
+    idjadi:=RightStr(id,1);
+    id:=IntToStr(StrToInt(idjadi)+1);
+    idjadi:='IDTB'+leftstr(nol,2-Length(id))+id;
+    Edit_pengiriman_barang.Text:=idjadi;
+    end
+    else
+    begin
+    Edit_pengiriman_barang.text:='IDTB01';
+    end;
+end;
+end;
+
+procedure TForm_pengiriman_barang.simpan_transaksi_barang;
+begin
+with Data_Module.ADOQuery_trans_barang do
+begin
+    Active:=False;
+    SQL.Text:='select * from trans_brg';
+    Active:=True;
+  end;
+  try
+  Data_Module.ADOConnection1.BeginTrans;
+  with Data_Module.ADOQuery_trans_barang do
+  begin
+    Active:=True;
+    //Close;
+    //SQL.Clear;
+    //SQL.Add('insert into trans_tiket values ('+QuotedStr(Edit_pemesanan_tiket.Text)+','+QuotedStr(Edit_petugas_pemesanan_tiket.Text)+','+(Edit_jumlah_pembayaran.Text)+')');
+     SQL.Text:='insert into trans_brg values ('+QuotedStr(Edit_pengiriman_barang.Text)+
+     ','+QuotedStr(Edit_petugas_pengiriman_barang.Text)+
+     ','+QuotedStr(Edit_total_harga_pengiriman_barang.Text)+
+     ','+QuotedStr(FormatDateTime('mm/dd/yyyy',DateTimePicker_pengiriman_barang.Date))+')';
+    ExecSQL;
+    end;
+Data_Module.ADOConnection1.CommitTrans;
+Application.MessageBox('Data Telah Tersimpan ! ! !','INFORMASI',mb_ok+mb_iconinformation);
+tampil;
+except
+Data_Module.ADOConnection1.RollbackTrans;
+Application.MessageBox('Data Gagal Tersimpan ! ! !','INFORMASI',mb_ok+MB_ICONERROR);
+end;
+end;
+
+
+procedure TForm_pengiriman_barang.tampil;
+begin
+with Data_Module.ADOQuery_untuk_tampil_transaksi_barang do
+begin
+  active:=False;
+  close;
+  sql.Text:='select tb.kd_trans, tb.id_petugas, tb.total_harga, tb.tanggal_transaksi, dttb.nama_brg, dttb.nama_pengirim, dttb.kota_awal,'+
+' dttb.alamat_pengiriman, dttb.kota_tujuan, dttb.alamat_penerima, dttb.no_hppengirim, dttb.no_hppenerima, dttb.id_jalur, dttb.nama_penerima,'+
+' tjb.jenis_barang, tbb.berat_per_kg '+
+' from trans_brg tb, detil_brg dttb, tb_jenis_barang tjb, tb_berat tbb '+
+' where tb.kd_trans=dttb.kd_trans and dttb.id_jenis=tjb.id_jenis and dttb.id_berat=tbb.id_berat '+
+' and tb.tanggal_transaksi= '+QuotedStr(DateToStr(DateTimePicker_pengiriman_barang.Date));
+  Active:=True;
+  DBGrid_pengiriman_barang.DataSource:=Data_Module.DataSource_untuk_tampil_barang;
+  Data_Module.DataSource_untuk_tampil_barang.DataSet:=Data_Module.ADOQuery_untuk_tampil_transaksi_barang;
+end;
+
+end;
+
+procedure TForm_pengiriman_barang.simpan_pengiriman_barang;
+begin
+  with Data_Module.ADOQuery_trans_barang do
+  begin
+    Active:=False;
+    SQL.Text:='select * from detil_brg';
+    Active:=True;
+  end;
+  try
+  Data_Module.ADOConnection1.BeginTrans;
+  with Data_Module.ADOQuery_trans_barang do
+  begin
+    Active:=True;
+    Close;
+    SQL.Clear;
+    //SQL.Add('insert into trans_tiket values ('+QuotedStr(Edit_pemesanan_tiket.Text)+','+QuotedStr(Edit_petugas_pemesanan_tiket.Text)+','+(Edit_jumlah_pembayaran.Text)+')');
+     SQL.Text:='insert into detil_brg values ('+QuotedStr(Edit_pengiriman_barang.Text)+
+     ' , '+QuotedStr(Edit_nama_barang.Text)+
+     ','+QuotedStr(Edit_nama_pengirim_barang.Text)+
+     ' , '+QuotedStr(Edit_kota_awal.Text)+
+     ','+QuotedStr(Edit_alamat_pengirim_barang.Text)+
+     ' , '+QuotedStr(Edit_kota_tujuan.Text)+
+     ','+QuotedStr(Edit8_alamat_penerima_barang.Text)+
+     ' , '+QuotedStr(Edit_nomor_telepon_pengirim.Text)+
+     ','+QuotedStr(Edit_nomor_telephon_penerima.Text)+
+     ' , '+QuotedStr(Edit_jalur_barang.Text)+
+     ','+QuotedStr(Edit_nama_penerima_barang.Text)+
+     ' , '+QuotedStr(id_jns_brg)+
+     ','+QuotedStr(id_berat_barang)+')';
+    ExecSQL;
+    end;
+Data_Module.ADOConnection1.CommitTrans;
+Application.MessageBox('Data Telah Tersimpan ! ! !','INFORMASI',mb_ok+mb_iconinformation);
+except
+Data_Module.ADOConnection1.RollbackTrans;
+Application.MessageBox('Data Gagal Tersimpan ! ! !','INFORMASI',mb_ok+MB_ICONERROR);
+end;
+
+end;
+
+end.
